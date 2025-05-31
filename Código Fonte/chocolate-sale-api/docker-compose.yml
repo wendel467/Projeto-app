@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: . # Assumes Dockerfile is in the same directory as docker-compose.yml
+      dockerfile: Dockerfile
+    ports:
+      - "${APP_PORT:-3000}:${APP_PORT:-3000}" # Use APP_PORT from .env, default to 3000
+    volumes:
+      - .:/usr/src/app # Mount current directory to app directory in container for live reload
+      - /usr/src/app/node_modules # Avoids overwriting node_modules in container with local ones
+    depends_on:
+      - db
+    environment:
+      - NODE_ENV=development
+      - APP_PORT=${APP_PORT:-3000}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=db # Service name of the database
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_NAME=${DB_NAME}
+    networks:
+      - chocolatenet
+
+  db:
+    image: postgres:15-alpine
+    ports:
+      - "${DB_PORT:-5432}:5432" # Expose DB port to host if needed for direct access
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount init script
+      - postgres_data:/var/lib/postgresql/data # Persist data
+    networks:
+      - chocolatenet
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # reporting_service: # Placeholder for the future distinct reporting service
+  #   build:
+  #     context: ./chocolate-reporting-service # Path to the reporting service's Docker context
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3001:3001" # Different port for reporting
+  #   depends_on:
+  #     - db
+  #   environment: # Similar DB env vars
+  #     - NODE_ENV=development
+  #     - APP_PORT=3001
+  #     - DB_USER=${DB_USER}
+  #     - DB_PASSWORD=${DB_PASSWORD}
+  #     - DB_HOST=db
+  #     - DB_PORT=${DB_PORT:-5432}
+  #     - DB_NAME=${DB_NAME}
+  #   volumes:
+  #     - ./chocolate-reporting-service:/usr/src/app
+  #     - /usr/src/app/node_modules
+  #   networks:
+  #     - chocolatenet
+
+volumes:
+  postgres_data:
+
+networks:
+  chocolatenet:
+    driver: bridge
