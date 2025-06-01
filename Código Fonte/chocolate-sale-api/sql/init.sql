@@ -1,12 +1,12 @@
 -- sql/init.sql
 
 -- Drop tables if they exist (for easy re-initialization during development)
-DROP TABLE IF EXISTS stock_movements CASCADE;
-DROP TABLE IF EXISTS order_items CASCADE;
-DROP TABLE IF EXISTS sales_orders CASCADE;
-DROP TABLE IF EXISTS products CASCADE;
-DROP TABLE IF EXISTS clients CASCADE;
-DROP TABLE IF EXISTS sellers CASCADE;
+DROP TABLE IF EXISTS stock_movements;
+DROP TABLE IF EXISTS order_items;
+DROP TABLE IF EXISTS sales_orders;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS clients;
+DROP TABLE IF EXISTS sellers;
 
 -- Create Tables
 CREATE TABLE clients (
@@ -87,71 +87,55 @@ INSERT INTO products (name, description, price, current_stock) VALUES
 -- Note: This is a simplified way. A trigger or application logic would be more robust for current_stock.
 -- For this setup, we'll update products.current_stock directly after inserts for simplicity of seeding.
 
-DO $$
-DECLARE
-    p_id INT;
-    initial_qty INT;
-BEGIN
-    -- Barra Chocolate Ao Leite 100g
-    SELECT product_id INTO p_id FROM products WHERE name = 'Barra Chocolate Ao Leite 100g';
-    initial_qty := 50;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Barra Chocolate Ao Leite 100g
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 50, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Barra Chocolate Ao Leite 100g';
+UPDATE products SET current_stock = current_stock + 50 WHERE name = 'Barra Chocolate Ao Leite 100g';
 
-    -- Barra Chocolate Amargo 70% 100g
-    SELECT product_id INTO p_id FROM products WHERE name = 'Barra Chocolate Amargo 70% 100g';
-    initial_qty := 30;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Barra Chocolate Amargo 70% 100g
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 30, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Barra Chocolate Amargo 70% 100g';
+UPDATE products SET current_stock = current_stock + 30 WHERE name = 'Barra Chocolate Amargo 70% 100g';
 
-    -- Caixa de Bombons Sortidos 12un
-    SELECT product_id INTO p_id FROM products WHERE name = 'Caixa de Bombons Sortidos 12un';
-    initial_qty := 20;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Caixa de Bombons Sortidos 12un
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 20, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Caixa de Bombons Sortidos 12un';
+UPDATE products SET current_stock = current_stock + 20 WHERE name = 'Caixa de Bombons Sortidos 12un';
 
-    -- Trufa de Maracujá Unidade
-    SELECT product_id INTO p_id FROM products WHERE name = 'Trufa de Maracujá Unidade';
-    initial_qty := 100;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Trufa de Maracujá Unidade
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 100, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Trufa de Maracujá Unidade';
+UPDATE products SET current_stock = current_stock + 100 WHERE name = 'Trufa de Maracujá Unidade';
 
-    -- Trufa de Brigadeiro Unidade
-    SELECT product_id INTO p_id FROM products WHERE name = 'Trufa de Brigadeiro Unidade';
-    initial_qty := 100;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Trufa de Brigadeiro Unidade
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 100, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Trufa de Brigadeiro Unidade';
+UPDATE products SET current_stock = current_stock + 100 WHERE name = 'Trufa de Brigadeiro Unidade';
 
-    -- Chocolate Branco com Cookies 90g
-    SELECT product_id INTO p_id FROM products WHERE name = 'Chocolate Branco com Cookies 90g';
-    initial_qty := 40;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Chocolate Branco com Cookies 90g
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 40, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Chocolate Branco com Cookies 90g';
+UPDATE products SET current_stock = current_stock + 40 WHERE name = 'Chocolate Branco com Cookies 90g';
 
-    -- Ovo de Páscoa Ao Leite 250g
-    SELECT product_id INTO p_id FROM products WHERE name = 'Ovo de Páscoa Ao Leite 250g';
-    initial_qty := 15;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Ovo de Páscoa Ao Leite 250g
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 15, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Ovo de Páscoa Ao Leite 250g';
+UPDATE products SET current_stock = current_stock + 15 WHERE name = 'Ovo de Páscoa Ao Leite 250g';
 
-    -- Kit Degustação Mini Barras 5 Sabores
-    SELECT product_id INTO p_id FROM products WHERE name = 'Kit Degustação Mini Barras 5 Sabores';
-    initial_qty := 25;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Kit Degustação Mini Barras 5 Sabores
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 25, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Kit Degustação Mini Barras 5 Sabores';
+UPDATE products SET current_stock = current_stock + 25 WHERE name = 'Kit Degustação Mini Barras 5 Sabores';
 
-    -- Chocolate Quente em Pó 200g
-    SELECT product_id INTO p_id FROM products WHERE name = 'Chocolate Quente em Pó 200g';
-    initial_qty := 30;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
+-- Chocolate Quente em Pó 200g
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 30, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Chocolate Quente em Pó 200g';
+UPDATE products SET current_stock = current_stock + 30 WHERE name = 'Chocolate Quente em Pó 200g';
 
-    -- Dragées de Chocolate Amargo com Amêndoas 150g
-    SELECT product_id INTO p_id FROM products WHERE name = 'Dragées de Chocolate Amargo com Amêndoas 150g';
-    initial_qty := 20;
-    INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes) VALUES (p_id, initial_qty, 'initial_stock', 'Carga inicial');
-    UPDATE products SET current_stock = current_stock + initial_qty WHERE product_id = p_id;
-END $$;
+-- Dragées de Chocolate Amargo com Amêndoas 150g
+INSERT INTO stock_movements (product_id, quantity_change, movement_type, notes)
+SELECT product_id, 20, 'initial_stock', 'Carga inicial' FROM products WHERE name = 'Dragées de Chocolate Amargo com Amêndoas 150g';
+UPDATE products SET current_stock = current_stock + 20 WHERE name = 'Dragées de Chocolate Amargo com Amêndoas 150g';
 
 -- Verify
 SELECT * FROM clients;

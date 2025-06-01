@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 
-const clientRoutes = require('./clientRoutes');
+const clientRoutes = require('./ClientRoutes');
 // const sellerRoutes = require('./sellerRoutes'); // Create similarly
 // const productRoutes = require('./productRoutes'); // Create similarly
 // const stockRoutes = require('./stockRoutes'); // Create similarly

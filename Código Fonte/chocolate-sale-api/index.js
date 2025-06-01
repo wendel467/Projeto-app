@@ -1,17 +1,17 @@
 // index.js
 require('dotenv').config();
 const express = require('express');
-const allRoutes = require('./routes'); // Will get routes/index.js
+const allRoutes = require('./routes'); 
 
 const app = express();
 const PORT = process.env.APP_PORT || 3000;
 
 // Middleware
-app.use(express.json()); // For parsing application/json
-app.use(express.urlencoded({ extended: true })); // For parsing application/x-www-form-urlencoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 
 // Routes
-app.use('/api', allRoutes); // Prefix all routes with /api
+app.use('/api', allRoutes);
 
 // Basic error handler
 app.use((err, req, res, next) => {
