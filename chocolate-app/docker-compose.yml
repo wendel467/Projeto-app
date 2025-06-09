@@ -62,6 +62,8 @@ services:
     networks:
       sd-network:
         ipv4_address: 172.23.0.4
+    ports:
+      - "3001:3001"
 
 volumes:
   postgres_data:
