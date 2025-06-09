@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  nodejs: 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs:latest
+    container_name: chocolate-app
+    restart: "no"
+    ports:
+      - "3000:3000"
+    working_dir: /app
+    volumes:
+      - ./:/app
+    environment:
+      - NODE_ENV=development
+      - APP_PORT=3000
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=27580971
+      - DB_NAME=postgres
+    networks:
+      sd-network:
+        ipv4_address: 172.23.0.3
+
+  db:
+    image: postgres:16
+    container_name: postgres-db
+    restart: "no"
+    environment:
+      POSTGRES_DB: chocolate_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: senha123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      sd-network:
+        ipv4_address: 172.23.0.2
+
+  relatorios:
+    build:
+      context: ./relatorios
+      dockerfile: Dockerfile
+    image: relatorios:latest
+    container_name: relatorios-app
+    restart: "no"
+    working_dir: /relatorios
+    volumes:
+      - ./relatorios:/relatorios
+      - /relatorios/node_modules
+    environment:
+      - RELATORIOS_ENV=development
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=senha123
+      - DB_NAME=chocolate_db
+    networks:
+      sd-network:
+        ipv4_address: 172.23.0.4
+
+volumes:
+  postgres_data:
+
+networks:
+  sd-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24

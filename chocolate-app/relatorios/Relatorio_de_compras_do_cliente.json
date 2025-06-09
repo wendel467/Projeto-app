@@ -1,0 +1,33 @@
+{
+  "relatorio": "Todas as compras do cliente",
+  "data_gerada": "2025-06-03T02:16:58.004Z",
+  "dados": [
+    {
+      "id_item_pedido": 15,
+      "nome_produto": "Barra Chocolate Ao Leite Cremoso",
+      "marca_produto": "Doçura Real",
+      "quantidade_comprada": 6,
+      "preco_unitario_do_produto": 7.5,
+      "valor_pago_no_item": 45,
+      "nome_cliente": "Bruno Medeiros Costa"
+    },
+    {
+      "id_item_pedido": 14,
+      "nome_produto": "Barra Chocolate Ao Leite Cremoso",
+      "marca_produto": "Doçura Real",
+      "quantidade_comprada": 6,
+      "preco_unitario_do_produto": 7.5,
+      "valor_pago_no_item": 45,
+      "nome_cliente": "Bruno Medeiros Costa"
+    },
+    {
+      "id_item_pedido": 13,
+      "nome_produto": "Chocolate Amargo Premium 75%",
+      "marca_produto": "Cacau Imperial",
+      "quantidade_comprada": 312,
+      "preco_unitario_do_produto": 18.9,
+      "valor_pago_no_item": 5896.799999999999,
+      "nome_cliente": "Bruno Medeiros Costa"
+    }
+  ]
+}

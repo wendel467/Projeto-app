@@ -1,0 +1,18 @@
+{
+  "relatorio": "Top 5 mais vendidos",
+  "data_gerada": "2025-06-03T00:17:41.310Z",
+  "dados": [
+    {
+      "id_do_produto": 4,
+      "nome_do_produto": "Barra Chocolate Ao Leite Cremoso",
+      "marca_do_produto": "Doçura Real",
+      "quantidade_total_vendida": 323
+    },
+    {
+      "id_do_produto": 6,
+      "nome_do_produto": "Chocolate Amargo Premium 75%",
+      "marca_do_produto": "Cacau Imperial",
+      "quantidade_total_vendida": 312
+    }
+  ]
+}
