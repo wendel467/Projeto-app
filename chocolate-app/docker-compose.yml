@@ -37,6 +37,7 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./seeders:/docker-entrypoint-initdb.d    # Novo caminho para seeds
     networks:
       sd-network:
         ipv4_address: 172.23.0.2
