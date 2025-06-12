@@ -1,0 +1,9 @@
+{
+  "relatorio": "Media de gasto do cliente",
+  "data_gerada": "2025-06-12T04:06:10.672Z",
+  "dados": {
+    "cliente_id": 2,
+    "nome_cliente": "Bruno Medeiros",
+    "custo_medio_por_compra": "349.4666666666666667"
+  }
+}

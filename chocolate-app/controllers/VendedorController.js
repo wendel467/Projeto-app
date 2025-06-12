@@ -22,25 +22,25 @@ class VendedorController {
     }
 
     create(req, res) {
-        const { nome, email, telefone, endereço, cpf } = req.body;
-        if (!nome || !email || !telefone || !endereço || !cpf) {
-            return res.status(400).json({ error: "Campos nome, email, telefone, endereço e cpf são obrigatórios" });
+        const { nome, email, telefone, endereco, cpf } = req.body;
+        if (!nome || !email || !telefone || !endereco || !cpf) {
+            return res.status(400).json({ error: "Campos nome, email, telefone, endereco e cpf são obrigatórios" });
         }
-        VendedorDAO.create(nome, email, telefone, endereço, cpf, (err, vendedor) => {
+        VendedorDAO.create(nome, email, telefone, endereco, cpf, (err, vendedor) => {
             if (err) return res.status(500).json({ error: err.message });
             res.status(201).json(vendedor);
         });
     }
 
     update(req, res) {
-        const { nome, email, telefone, endereço } = req.body;
+        const { nome, email, telefone, endereco } = req.body;
         const matricula = req.params.matricula;
 
-        if (!nome && !email && !telefone && !endereço) {
-            return res.status(400).json({ error: "Pelo menos um campo (nome, email, telefone, endereço) deve ser fornecido para atualização." });
+        if (!nome && !email && !telefone && !endereco) {
+            return res.status(400).json({ error: "Pelo menos um campo (nome, email, telefone, endereco) deve ser fornecido para atualização." });
         }
 
-        VendedorDAO.update(matricula, nome, email, telefone, endereço, (err, sucesso) => {
+        VendedorDAO.update(matricula, nome, email, telefone, endereco, (err, sucesso) => {
             if (err) return res.status(500).json({ error: err.message });
             if (!sucesso) {
                 return res.status(404).json({ message: "Vendedor não encontrado ou nenhum dado alterado." }); 

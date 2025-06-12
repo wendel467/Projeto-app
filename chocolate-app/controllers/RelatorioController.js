@@ -3,7 +3,7 @@ const path = require("path");
 const RelatorioDAO = require("../daos/RelatorioDAO");
 const { error } = require("console");
 
-const caminho_relatorios_estaticos = path.join(__dirname,"..", "relatorios");
+const caminho_relatorios_estaticos = path.join(__dirname,"..", "estaticos");
 const nome_relatorio_top5_vendas = "Relatorio_5_produtos_mais_vendidos.json";
 const caminho_completo_arquivo_top5 = path.join(caminho_relatorios_estaticos,nome_relatorio_top5_vendas);
 
@@ -32,7 +32,7 @@ class RelatorioController {
         try{
             fs.writeFileSync(caminho_completo_arquivo_top5,jsonData,"utf-8");
             console.log(`Relatorio mais vendidos gerado em: ${caminho_completo_arquivo_top5}`);
-            res.status(200).json({message:"Relatorio criado"});
+            res.status(200).json(relatorio_conteudo);
         }catch(saveErr){
             console.error("Erro ao salvar relatorio",saveErr.message);
             res.status(500).json({error:"Falha ao salvar o relatorio:"+ saveErr.message})
@@ -56,7 +56,7 @@ class RelatorioController {
             try{
                 fs.writeFileSync(caminho_completo_arquivo_cliente,jsonData,"utf-8");
                 console.log(`Relatorio total de compras do cliente gerado em: ${caminho_completo_arquivo_cliente}`);
-                res.status(200).json({message: "Relatorio criado"})
+                res.status(200).json(relatorio_conteudo_cliente)
             }catch(saveErr){
             console.error("Erro ao salvar relatorio",saveErr.message);
             res.status(500).json({error:"Falha ao salvar o relatorio:"+ saveErr.message})
@@ -80,7 +80,7 @@ class RelatorioController {
             try{
                 fs.writeFileSync(caminho_comleto_arquivo_gasto_medio_do_cliente,jsonData,"utf-8");
                 console.log(`Relatorio gasto medio do cliente gerado em ${caminho_comleto_arquivo_gasto_medio_do_cliente}.`);
-                res.status(200).json({message: "Relatorio criado"});
+                res.status(200).json(relatorio_gasto_medio_cliente);
             }catch(saveErr){
                 console.error("Erro ao salvar relatorio",saveErr.message);
                 res.status(500).json({error:"Falha ao salvar o relatorio:"+ saveErr.message})
@@ -93,7 +93,7 @@ class RelatorioController {
             if(!produtos || produtos.length === 0) return res.status(404).json(`Não há produtos com estoque abaixo de ${estoqueMinimo}`)
             
             const relatorio_estoque_minimo = {
-                relatorio : "Produtos com estoque baixo",
+                relatorio : "Produtos com estoque abaixo de 10",
                 data_gerada: new Date().toISOString(),
                 dados: produtos
             }
@@ -102,7 +102,7 @@ class RelatorioController {
             try{
                 fs.writeFileSync(caminho_completo_arquivo_estoque_baixo,jsonData,"utf-8");
                 console.log(`Relatorio de estoque baixo gerado em ${caminho_completo_arquivo_estoque_baixo}.`);
-                res.status(200).json({message: "Relatorio criado"})
+                res.status(200).json(relatorio_estoque_minimo)
             }catch(saveErr){
                 console.error("Erro ao salvar relatorio",saveErr.message);
                 res.status(500).json({error:"Falha ao salvar o relatorio:"+ saveErr.message})

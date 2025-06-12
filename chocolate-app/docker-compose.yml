@@ -53,6 +53,10 @@ services:
     volumes:
       - ./relatorios:/relatorios
       - /relatorios/node_modules
+      - ./routes:/relatorios/routes
+      - ./controllers:/relatorios/controllers
+      - ./daos:/relatorios/daos
+      - ./db.js:/relatorios/db.js
     environment:
       - RELATORIOS_ENV=development
       - DB_HOST=db

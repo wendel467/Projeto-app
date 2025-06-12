@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS clientes (
     email VARCHAR(100) NOT NULL,
     telefone VARCHAR(20) NOT NULL,
     endereco VARCHAR(200) NOT NULL,
-    cpf VARCHAR(11) NOT NULL UNIQUE
+    cpf VARCHAR(11) NOT NULL UNIQUE,
+    valorgasto REAL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS produto (
@@ -25,6 +26,18 @@ CREATE TABLE IF NOT EXISTS produto (
     preco DECIMAL(10,2) NOT NULL,
     estoque INTEGER NOT NULL,
     disponivel_venda BOOLEAN DEFAULT TRUE
+);
+
+CREATE TABLE IF NOT EXISTS pedidos (
+    id SERIAL PRIMARY KEY,
+    fk_matricula_vendedor INTEGER NOT NULL,
+    fk_id_cliente INTEGER NOT NULL,
+    fk_id_produto INTEGER NOT NULL,
+    quantidade INTEGER NOT NULL,
+    valor_total NUMERIC(10, 2) NOT NULL,
+    FOREIGN KEY (fk_matricula_vendedor) REFERENCES vendedores(matricula),
+    FOREIGN KEY (fk_id_cliente) REFERENCES clientes(id),
+    FOREIGN KEY (fk_id_produto) REFERENCES produto(id)
 );
 
 -- Inserindo Vendedores

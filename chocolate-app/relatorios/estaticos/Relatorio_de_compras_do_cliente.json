@@ -1,0 +1,33 @@
+{
+  "relatorio": "Todas as compras do cliente",
+  "data_gerada": "2025-06-12T04:06:00.570Z",
+  "dados": [
+    {
+      "id_item_pedido": 3,
+      "nome_produto": "Trufa de Chocolate Belga",
+      "marca_produto": "Chocolateria Fina",
+      "quantidade_comprada": 1,
+      "preco_unitario_do_produto": "8.90",
+      "valor_pago_no_item": "8.90",
+      "nome_cliente": "Bruno Medeiros"
+    },
+    {
+      "id_item_pedido": 2,
+      "nome_produto": "Trufa de Chocolate Belga",
+      "marca_produto": "Chocolateria Fina",
+      "quantidade_comprada": 90,
+      "preco_unitario_do_produto": "8.90",
+      "valor_pago_no_item": "801.00",
+      "nome_cliente": "Bruno Medeiros"
+    },
+    {
+      "id_item_pedido": 1,
+      "nome_produto": "Barra de Chocolate 70% Cacau",
+      "marca_produto": "Cacau Select",
+      "quantidade_comprada": 15,
+      "preco_unitario_do_produto": "15.90",
+      "valor_pago_no_item": "238.50",
+      "nome_cliente": "Bruno Medeiros"
+    }
+  ]
+}

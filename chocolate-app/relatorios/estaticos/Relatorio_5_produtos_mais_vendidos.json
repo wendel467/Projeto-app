@@ -1,0 +1,18 @@
+{
+  "relatorio": "Top 5 mais vendidos",
+  "data_gerada": "2025-06-12T04:07:19.343Z",
+  "dados": [
+    {
+      "id_do_produto": 1,
+      "nome_do_produto": "Trufa de Chocolate Belga",
+      "marca_do_produto": "Chocolateria Fina",
+      "quantidade_total_vendida": "91"
+    },
+    {
+      "id_do_produto": 2,
+      "nome_do_produto": "Barra de Chocolate 70% Cacau",
+      "marca_do_produto": "Cacau Select",
+      "quantidade_total_vendida": "15"
+    }
+  ]
+}

@@ -63,7 +63,7 @@ class Database {
                 nome TEXT NOT NULL,
                 email TEXT NOT NULL UNIQUE,
                 telefone TEXT NOT NULL,
-                endereço TEXT NOT NULL,
+                endereco TEXT NOT NULL,
                 cpf TEXT NOT NULL UNIQUE,
                 valorgasto REAL DEFAULT 0
                 );

@@ -19,20 +19,20 @@ class ClienteController {
     });    
     }
     create(req,res) {
-    const { nome, email, telefone,endereço,cpf } = req.body;
-    if (!nome || !email ||!telefone ||!endereço ||!cpf){
-        return res.status(400).json({error:"Campos nome,email, telefone, endereço e cpf são obrigatorios"});
+    const { nome, email, telefone,endereco,cpf } = req.body;
+    if (!nome || !email ||!telefone ||!endereco ||!cpf){
+        return res.status(400).json({error:"Campos nome,email, telefone, endereco e cpf são obrigatorios"});
     }
-    ClienteDAO.create(nome,email,telefone,endereço,cpf,(err,cliente)=>{
+    ClienteDAO.create(nome,email,telefone,endereco,cpf,(err,cliente)=>{
         if (err) return res.status(500).json({error: err.message});
         res.status(201).json(cliente);
     });        
     }
     update(req,res) {
-    const {nome, email, telefone,endereço} = req.body;
+    const {nome, email, telefone,endereco} = req.body;
     const id = req.params.id;
 
-    ClienteDAO.update(id,nome,email,telefone,endereço,(err,cliente)=>{
+    ClienteDAO.update(id,nome,email,telefone,endereco,(err,cliente)=>{
         if (err) return res.status(500).json({error:err.message});
         if (!cliente) return res.status(404).json({error:err.message});
         res.json({ message: "Cliente atualizado com sucesso." });        

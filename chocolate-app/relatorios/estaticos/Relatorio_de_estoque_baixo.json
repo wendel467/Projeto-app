@@ -1,0 +1,13 @@
+{
+  "relatorio": "Produtos com estoque abaixo de 10",
+  "data_gerada": "2025-06-12T04:06:17.913Z",
+  "dados": [
+    {
+      "id": 1,
+      "nome": "Trufa de Chocolate Belga",
+      "marca": "Chocolateria Fina",
+      "estoque": 9,
+      "preco": "8.90"
+    }
+  ]
+}
