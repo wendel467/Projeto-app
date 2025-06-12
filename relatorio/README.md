@@ -1,138 +1,103 @@
-# Sistema de Gerenciamento de Chocolateria
+# Sistema de Gerenciamento de Chocolataria 🍫
 
-Sistema distribuído para gerenciamento de clientes, vendedores, produtos, pedidos e relatórios em uma chocolateria, utilizando Node.js, PostgreSQL e Docker.
+## 📝 Descrição
+Sistema distribuído para gerenciamento de uma loja de chocolates, desenvolvido com Node.js, PostgreSQL e Docker. O sistema oferece funcionalidades completas para gestão de clientes, produtos, pedidos e relatórios.
 
-## Arquitetura do Sistema
-
-### Microserviços
-- **API Principal**: Operações CRUD (porta 3000)
-- **Serviço de Relatórios**: Geração de relatórios (porta 3001)
-- **Banco de Dados**: PostgreSQL (porta 5432)
-
-### Estrutura de Diretórios
+## 📁 Estrutura do Projeto
 ```
 chocolate-app/
-├── controllers/        # Controladores da aplicação
-├── daos/              # Camada de acesso a dados
-├── models/            # Modelos de dados
-├── routes/            # Rotas da API
-├── relatorios/        # Microserviço de relatórios
-└── seeders/           # Scripts de população do banco
+├── controllers/                 # Controladores da aplicação
+│   ├── ClienteController.js    # Gerencia operações de clientes
+│   ├── PedidoController.js     # Gerencia operações de pedidos
+│   ├── ProdutoController.js    # Gerencia operações de produtos
+│   ├── RelatorioController.js  # Gerencia geração de relatórios
+│   └── VendedorController.js   # Gerencia operações de vendedores
+│
+├── daos/                       # Camada de acesso a dados
+│   ├── ClienteDAO.js          # Acesso aos dados de clientes
+│   ├── PedidoDAO.js           # Acesso aos dados de pedidos
+│   ├── ProdutoDAO.js          # Acesso aos dados de produtos
+│   ├── RelatorioDAO.js        # Acesso aos dados de relatórios
+│   └── VendedorDAO.js         # Acesso aos dados de vendedores
+│
+├── models/                     # Modelos de dados
+│   ├── Cliente.js             # Modelo de cliente
+│   ├── Pedido.js             # Modelo de pedido
+│   ├── Produto.js            # Modelo de produto
+│   └── Vendedor.js           # Modelo de vendedor
+│
+├── routes/                    # Rotas da API
+│   ├── clienteRoutes.js      # Rotas para clientes
+│   ├── pedidoRoutes.js       # Rotas para pedidos
+│   ├── produtoRoutes.js      # Rotas para produtos
+│   ├── relatorioRoutes.js    # Rotas para relatórios
+│   └── vendedorRoutes.js     # Rotas para vendedores
+│
+├── relatorios/               # Microsserviço de relatórios
+│   ├── controllers/         
+│   ├── routes/             
+│   ├── index.js            
+│   ├── db.js              
+│   ├── Dockerfile          
+│   └── package.json        
+│
+├── seeders/                 # Scripts de população do banco
+│   └── seed.sql            # Dados iniciais do banco
+│
+├── .env                     # Variáveis de ambiente
+├── db.js                   # Configuração do banco de dados
+├── Dockerfile              # Configuração do container principal
+├── docker-compose.yml      # Configuração dos serviços Docker
+├── Index.js               # Ponto de entrada da aplicação
+└── package.json           # Dependências do projeto
 ```
 
-## Dados Iniciais do Sistema
+## 🚀 Funcionalidades
 
-### Vendedores Cadastrados
-1. Maria Silva
-   - Email: maria@chocolateria.com
-   - Telefone: 71999887766
+### 👥 Gerenciamento de Clientes
+- CRUD completo de clientes
+- Histórico de compras
+- Cálculo de valor gasto
 
-2. João Santos
-   - Email: joao@chocolateria.com
-   - Telefone: 71999887755
+### 🍫 Gerenciamento de Produtos
+- CRUD completo de produtos
+- Controle de estoque
+- Status de disponibilidade
 
-### Clientes Cadastrados
-1. Ana Costa
-2. Bruno Medeiros
-3. Carla Souza
-4. Daniel Lima
-5. Elena Santos
+### 📦 Gerenciamento de Pedidos
+- Criação e acompanhamento de pedidos
+- Atualização automática de estoque
+- Cálculo de valores
 
-### Produtos Disponíveis
-1. Trufa de Chocolate Belga (R$ 8,90)
-2. Barra de Chocolate 70% Cacau (R$ 15,90)
-3. Bombom Recheado Cereja (R$ 3,50)
-4. Chocolate ao Leite Premium (R$ 12,90)
-5. Chocolate Branco com Nuts (R$ 11,90)
-6. Chocolate Amargo Zero Açúcar (R$ 18,90)
-7. Kit Bombons Sortidos (R$ 29,90)
-8. Barra Chocolate com Morango (R$ 13,90)
-9. Chocolate em Pó 50% Cacau (R$ 19,90)
-10. Chocolate Crocante (R$ 10,90)
+### 📊 Relatórios
+- Top 5 produtos mais vendidos
+- Histórico de compras por cliente
+- Média de gastos por cliente
+- Alertas de estoque baixo
 
-## APIs Disponíveis
+## 🛠️ Tecnologias Utilizadas
 
-### API Principal (porta 3000)
+- Node.js
+- PostgreSQL
+- Docker
+- Express.js
 
-#### Clientes
-- `GET /clientes`: Lista todos os clientes
-- `GET /clientes/:id`: Busca cliente específico
-- `POST /clientes`: Cria novo cliente
-- `PUT /clientes/:id`: Atualiza cliente
-- `DELETE /clientes/:id`: Remove cliente
-
-#### Produtos
-- `GET /produtos`: Lista todos os produtos
-- `GET /produtos/:id`: Busca produto específico
-- `POST /produtos`: Cadastra novo produto
-- `PUT /produtos/:id`: Atualiza produto
-- `DELETE /produtos/:id`: Remove produto
-
-#### Vendedores
-- `GET /vendedor`: Lista todos os vendedores
-- `GET /vendedor/:matricula`: Busca vendedor específico
-- `POST /vendedor`: Cadastra novo vendedor
-- `PUT /vendedor/:matricula`: Atualiza vendedor
-- `DELETE /vendedor/:matricula`: Remove vendedor
-
-### Serviço de Relatórios (porta 3001)
-- `GET /relatorios/mais_vendido`: Top 5 produtos mais vendidos
-- `GET /relatorios/cliente/total/:id`: Total de compras por cliente
-- `GET /relatorios/cliente/media/:id`: Média de gastos por cliente
-- `GET /relatorios/produto_estoque_baixo`: Produtos com estoque baixo
-
-## Instalação e Execução
+## ⚙️ Configuração do Ambiente
 
 ### Pré-requisitos
-- Docker e Docker Compose
+- Docker Desktop
 - Node.js
 - PostgreSQL
 
-### Comandos
+### Instalação
+
+1. Clone o repositório:
 ```bash
-# Clone o repositório
-git clone [url-do-repositorio]
-
-# Entre na pasta
+git clone [url-do-repositório]
 cd chocolate-app
-
-# Inicie os containers
-docker-compose up -d
-
-# Execute o seed do banco
-docker cp seed.sql postgres-db:/docker-entrypoint-initdb.d/seed.sql
-docker exec postgres-db psql -U postgres chocolate_db -f /docker-entrypoint-initdb.d/seed.sql
 ```
 
-## Configuração do Banco
-
-### Conexão
-```
-Host: localhost
-Port: 5432
-Database: chocolate_db
-User: postgres
-Password: senha123
-```
-
-## Testes via Postman
-
-### Exemplo de Criação de Cliente
-```http
-POST http://localhost:3000/clientes
-Content-Type: application/json
-
-{
-    "nome": "João Silva",
-    "email": "joao@email.com",
-    "telefone": "11999999999",
-    "endereco": "Rua Exemplo, 123",
-    "cpf": "12345678900"
-}
-```
-
-## Variáveis de Ambiente
-Arquivo `.env` necessário na raiz do projeto:
+2. Configure o arquivo `.env`:
 ```env
 NODE_ENV=development
 APP_PORT=3000
@@ -142,3 +107,65 @@ DB_NAME=chocolate_db
 DB_USER=postgres
 DB_PASSWORD=senha123
 ```
+
+3. Inicie os containers:
+```bash
+docker-compose up -d
+```
+
+## 📡 Endpoints da API
+
+### Clientes
+```
+GET    /clientes
+GET    /clientes/:id
+POST   /clientes
+PUT    /clientes/:id
+DELETE /clientes/:id
+```
+
+### Produtos
+```
+GET    /produtos
+GET    /produtos/:id
+POST   /produtos
+PUT    /produtos/:id
+DELETE /produtos/:id
+```
+
+### Pedidos
+```
+GET    /pedidos
+GET    /pedidos/:id
+POST   /pedidos
+PUT    /pedidos/:id
+DELETE /pedidos/:id
+```
+
+### Relatórios
+```
+GET /relatorios/mais_vendido
+GET /relatorios/cliente/total/:id
+GET /relatorios/cliente/media/:id
+GET /relatorios/produto_estoque_baixo
+```
+
+## 🐳 Serviços Docker
+
+### Configuração
+- **API Principal**: Porta 3000
+- **Banco de Dados**: Porta 5432
+- **Serviço de Relatórios**: Porta 3001
+
+### Rede
+- Subnet: 172.23.0.0/24
+- Driver: bridge
+
+## 📝 Licença
+
+ISC
+
+## 👥 Autores
+
+[André Vinícius Souza, Nayara Lorena, Victor Sobral, Wendel Alves]
+
